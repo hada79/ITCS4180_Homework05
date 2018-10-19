@@ -117,6 +117,8 @@ public class MainActivity extends AppCompatActivity implements GetSeriesAPI.Data
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(MainActivity.this, CharctersActivity.class);
                 i.putExtra("Series", (Serializable) (seriesArrayList.get(position)));
+                i.putExtra("APIKey", APIKey );
+                i.putExtra("PrivateKey", privateKey );
                 // Starts TargetActivity
                 startActivity(i);
 

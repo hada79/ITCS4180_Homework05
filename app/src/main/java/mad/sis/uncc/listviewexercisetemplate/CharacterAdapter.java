@@ -8,16 +8,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class SeriesAdapter extends ArrayAdapter<Series>{
-
+public class CharacterAdapter extends ArrayAdapter<Series>{
+//TODO: this was just copied and pasted of SeriesAdapter
     Context context;
     ViewHolder viewHolder = null;
     int resource = 0;
@@ -50,7 +48,7 @@ public class SeriesAdapter extends ArrayAdapter<Series>{
         return convertView;
     }
 
-    public SeriesAdapter(Context context, int resource, List<Series> objects) {
+    public CharacterAdapter(Context context, int resource, List<Series> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;
