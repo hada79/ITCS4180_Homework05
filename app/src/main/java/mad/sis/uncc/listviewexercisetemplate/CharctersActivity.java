@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 public class CharctersActivity extends AppCompatActivity implements GetCharactersAPI.DataInterface{
 
+    ArrayList<SrCharacter> characterArrayList = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -26,16 +30,13 @@ public class CharctersActivity extends AppCompatActivity implements GetCharacter
             Log.d("2","Null list");
         else {
             ListView chListView = (ListView) findViewById(R.id.charListView);
-            ArrayAdapter<String> adapter = new CharacterAdapter(CharctersActivity.this, R.layout.character_list_item, series.getCharacters());
-            chListView.setAdapter(adapter);
+            GetCharactersAPI getCharactersAPI = new GetCharactersAPI(CharctersActivity.this,CharctersActivity.this);
+            getCharactersAPI.execute(Integer.toString(series.getSerID()),APIKey,privateKey);
         }
 
         TextView serNameView = (TextView) findViewById(R.id.srNametextView);
         serNameView.setText(series.getName());
         setTitle("Series ID: "+series.getSerID());
-
-        GetCharactersAPI getCharactersAPI = new GetCharactersAPI(CharctersActivity.this,CharctersActivity.this);
-        getCharactersAPI.execute(Integer.toString(series.getSerID()),APIKey,privateKey);
 
     }
 
@@ -45,7 +46,26 @@ public class CharctersActivity extends AppCompatActivity implements GetCharacter
     }
 
     @Override
-    public void sendSeries(ArrayList<Series> seriesArrayList) {
+    public void sendSrCharacters(ArrayList<SrCharacter> srCharactersArrayList) {
+        this.characterArrayList = srCharactersArrayList;
+        ListView characterListView = (ListView) findViewById(R.id.charListView);
+        characterListView.setVisibility(View.VISIBLE);
+        //Setting up the List View..............
+        CharacterAdapter adapter = new CharacterAdapter(CharctersActivity.this, R.layout.character_list_item, characterArrayList);
+        characterListView.setAdapter(adapter);
+        //AdapterView.OnItemClickListener onItemClickListener = ;
+        characterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //TODO: WebActivity
+//                Intent i = new Intent(CharctersActivity.this, CharactersActivity.class);
+//                i.putExtra("Series", (Serializable) (characterArrayList.get(position)));
+//                i.putExtra("APIKey", APIKey );
+//                i.putExtra("PrivateKey", privateKey );
+//                // Starts TargetActivity
+//                startActivity(i);
 
+            }
+        });
     }
 }

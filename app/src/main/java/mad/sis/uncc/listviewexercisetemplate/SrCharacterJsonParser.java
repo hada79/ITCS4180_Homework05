@@ -13,7 +13,7 @@ public class SrCharacterJsonParser {
 
     static public ArrayList<SrCharacter> parseJsonString(String jstring,GetCharactersAPI.DataInterface iData)
     {
-        ArrayList <SrCharacter> srList = new ArrayList<SrCharacter>();
+        ArrayList <SrCharacter> crList = new ArrayList<SrCharacter>();
         try
         {
             JSONObject root = new JSONObject(jstring);
@@ -27,11 +27,8 @@ public class SrCharacterJsonParser {
                     SrCharacter charItem = new SrCharacter();
                     Log.d("json", "SrCharacter" + i);
                     JSONObject serObj = jSrCharacter.getJSONObject(i);
-                    //id
-                    charItem.setSerID(serObj.getInt("id"));
-                    Log.d("json", "SrCharacter" + i + " id: " + charItem.getSerID());
-                    //title
-                    charItem.setName(serObj.getString("title"));
+                    //name
+                    charItem.setName(serObj.getString("name"));
                     Log.d("json", "SrCharacter" + i + " name: " + charItem.getName());
                     //description
                     charItem.setDescription(serObj.getString("description"));
@@ -51,23 +48,9 @@ public class SrCharacterJsonParser {
                     imgURLb.append(thmObj.getString("extension"));
                     charItem.setImgUrl(imgURLb.toString());
                     Log.d("json","SrCharacter"+i+" imgUrl: "+charItem.getImgUrl());
-                    //SrCharacter CharcterList
-                    ArrayList <String> charList = new ArrayList<>();
-                    //Get characters object
-                    JSONObject charsObj = serObj.getJSONObject("characters");
-                    JSONArray charsItems = charsObj.getJSONArray("items");
-                    if(charsItems.length() != 0)
-                    {
-                        for(int j =0;j<charsItems.length();j++)
-                        {
-                            //SrCharacter srCharacter = new SrCharacter();
-                            JSONObject charObj = charsItems.getJSONObject(j);
-                            charList.add(charObj.getString("name"));
-                        }
-                    }
-                    charItem.setCharacters(charList);
-                    srList.add(charItem);
-                    for(int k =0;k<1000000;k++);
+
+                    crList.add(charItem);
+                    //for(int k =0;k<1000000;k++);
                     iData.updateProgress((100/jSrCharacter.length())* (i+1));
                 }
 
@@ -78,6 +61,6 @@ public class SrCharacterJsonParser {
             e.printStackTrace();
         }
 
-        return srList;
+        return crList;
     }
 }

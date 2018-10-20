@@ -14,15 +14,15 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
-public class CharacterAdapter extends ArrayAdapter<Series>{
-//TODO: this was just copied and pasted of SeriesAdapter
+public class CharacterAdapter extends ArrayAdapter<SrCharacter>{
+
     Context context;
     ViewHolder viewHolder = null;
     int resource = 0;
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        Series series = getItem(position);
+        SrCharacter character = getItem(position);
 
         if(convertView == null) {
             convertView = LayoutInflater.from(getContext()).inflate(this.resource, parent, false);
@@ -30,25 +30,25 @@ public class CharacterAdapter extends ArrayAdapter<Series>{
             //convertView.setOnClickListener(onClickListener);
             viewHolder = new ViewHolder();
             convertView.setTag(viewHolder);
-            viewHolder.nameView = (TextView) convertView.findViewById(R.id.nameView);
-            viewHolder.descrptionView = (TextView) convertView.findViewById(R.id.descriptionView);
-            viewHolder.urlView = (TextView) convertView.findViewById(R.id.urlView);
-            viewHolder.imageView = convertView.findViewById(R.id.imageView);
+            viewHolder.nameView = (TextView) convertView.findViewById(R.id.name_tv);
+            viewHolder.descrptionView = (TextView) convertView.findViewById(R.id.description_tv);
+            viewHolder.urlView = (TextView) convertView.findViewById(R.id.url_tv);
+            viewHolder.imageView = convertView.findViewById(R.id.character_iv);
         }
         else
             viewHolder = (ViewHolder) convertView.getTag();
-            viewHolder.nameView.setText(series.getName());
-        if(series.getDescription().equals("null"))
+            viewHolder.nameView.setText(character.getName());
+        if(character.getDescription().equals("null"))
             viewHolder.descrptionView.setText("No description Available!");
         else
-            viewHolder.descrptionView.setText(series.getDescription());
-        viewHolder.urlView.setText(series.getUrl());
-        Picasso.get().load(series.getImgUrl()).into(viewHolder.imageView);
+            viewHolder.descrptionView.setText(character.getDescription());
+        viewHolder.urlView.setText(character.getUrl());
+        Picasso.get().load(character.getImgUrl()).into(viewHolder.imageView);
 
         return convertView;
     }
 
-    public CharacterAdapter(Context context, int resource, List<Series> objects) {
+    public CharacterAdapter(Context context, int resource, List<SrCharacter> objects) {
         super(context, resource, objects);
         this.context = context;
         this.resource = resource;

@@ -37,7 +37,7 @@ public class GetCharactersAPI extends AsyncTask <String,Integer,ArrayList> {
         String response = null;
         ArrayList<SrCharacter> crList = new ArrayList<SrCharacter>();
         try {
-            String urlString = "https://gateway.marvel.com:443/v1/public/series/"+strings[0]+"/characters?apikey="+URLEncoder.encode(strings[1].toLowerCase(),"UTF-8")+"&hash="+URLEncoder.encode(hash.toLowerCase(),"UTF-8");
+            String urlString = "https://gateway.marvel.com:443/v1/public/series/"+strings[0]+"/characters?ts="+time+"&apikey="+URLEncoder.encode(strings[1].toLowerCase(),"UTF-8")+"&hash="+URLEncoder.encode(hash.toLowerCase(),"UTF-8");
             Log.d("test", "the http Url is:"+urlString);
             URL url = new URL(urlString);
             connection = (HttpURLConnection) url.openConnection();

@@ -79,9 +79,6 @@ public class MainActivity extends AppCompatActivity implements GetSeriesAPI.Data
             }
         });
 
-
-
-
     }
     private boolean isConnected(){
         ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);

@@ -68,7 +68,7 @@ public class SeriesJsonParser {
                         }
                         serItem.setCharacters(charList);
                         srList.add(serItem);
-                        for(int k =0;k<1000000;k++);
+                        //for(int k =0;k<1000000;k++);
                         iData.updateProgress((100/jseries.length())* (i+1));
                     }
 
