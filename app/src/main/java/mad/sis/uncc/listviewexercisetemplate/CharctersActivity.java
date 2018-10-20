@@ -57,13 +57,10 @@ public class CharctersActivity extends AppCompatActivity implements GetCharacter
         characterListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //TODO: WebActivity
-//                Intent i = new Intent(CharctersActivity.this, CharactersActivity.class);
-//                i.putExtra("Series", (Serializable) (characterArrayList.get(position)));
-//                i.putExtra("APIKey", APIKey );
-//                i.putExtra("PrivateKey", privateKey );
-//                // Starts TargetActivity
-//                startActivity(i);
+                Intent i = new Intent(CharctersActivity.this, WebviewActivity.class);
+                i.putExtra("URL", (characterArrayList.get(position)).getUrl());
+
+                startActivity(i);
 
             }
         });
